@@ -1,0 +1,24 @@
+login korisnika
+-- moddati register i tak napraviti registraciju i prijavu korisnika
+skopirati i z kontralera ne sam z viewa
+skopirali smo dota toga z account controllera u korisnik, za login
+
+
+
+u korisnik boolean pamtiLozinku
+
+
+korisnik 
+to se se skopiralo , ali smo v krivi mapi bili???je
+i naziv v html helperu
+
+
+
+
+
+
+nekakvi plugin s kalendarom
+
+ kojeg korisnik trazi, gleda slobodne datume 
+
+

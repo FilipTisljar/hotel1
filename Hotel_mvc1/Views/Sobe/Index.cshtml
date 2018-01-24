@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Hotel_mvc1.Models.Soba>
+
+@{
+    ViewBag.Title = "Sobe";
+}
+
+<h2>Sobe</h2>
+
+@{string session = (string)Session["uloga"];
+
+}
+@if (session == "admin")
+{
+<p>
+    @Html.ActionLink("Nova soba", "Create")
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.brojSobe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.brojKreveta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.brojSobe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.brojKreveta)
+        </td>
+        <td>
+
+            @Html.ActionLink("Detalji", "Details", new { id = item.idsoba })
+        </td>
+
+        @if (session == "admin")
+        {
+            <td>
+                @Html.ActionLink(" Uredi", "Edit", new { id = item.idsoba })
+            </td>
+        }
+
+        @if (session == "admin")
+        {
+            <td>
+                @Html.ActionLink(" Obrisi", "Delete", new { id = item.idsoba })
+                
+            </td>
+        }
+    
+    </tr>
+}
+</table>

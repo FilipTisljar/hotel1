@@ -1,0 +1,28 @@
+prvo smo nap. bazu
+tablica rezervacija nam je poveznica s korisnikom i sobom
+to smo stavili na lokalni sql server
+22.10
+stavili connection string u web config, sve o server port lozinka imebaze
+add name="hotelBazaContext" providerName="MySql.Data.MySqlClient" connectionString="server=localhost;   port=3306;database=hotel;uid=root;password=admin" 
+i to ime konteksta
+koristimo entity framework addone
+
+-- rezervacija 
+-- treba sloziti dropdown za id_korisnik i id_soba koji vec postoje da bi napravili rezervaciju
+POZIVANJE MODELA U FOREACH PETLJI????
+
+23.10
+ispada da je model baze dober
+nebre se stvoriti rezervacija ak id od korisnika ne postoji
+
+25.10
+ma youtubu pronadjen nacin stvaranja logina, rigistradcija je ista kao i create -----> gotov autogenerinan kod entitiy frameworka
+kod logina koristimo sesije
+//zajeb kod gettera , prenosenja objekta
+
+
+sesija sama drzi objekt koji smo poslali
+
+23.1.2018
+napravljeni logout , i uloge smo slozili z sesijom( dodala se jedna admin uloga)
+
