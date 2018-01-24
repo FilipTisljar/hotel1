@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<Hotel_mvc1.Models.Korisnik>
-
+@using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Korisnici";
 }
 
-<h2>Index</h2>
+@{string session = (string)Session["uloga"];
+    string sessionIme = (string)Session["ime"];
+}
+<h2>Korisnici</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -17,9 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.prezime)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.pamtiLozinku)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.lozinka)
         </th>
@@ -37,9 +40,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.prezime)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.pamtiLozinku)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.lozinka)
         </td>
@@ -47,10 +50,22 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idkorisnik }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idkorisnik }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idkorisnik })
-        </td>
+            @if (sessionIme == item.ime)
+            {
+                @Html.ActionLink("Uredi informacije", "Edit", new { id = item.idkorisnik }) 
+            }
+            </td>
+          <td>
+            @Html.ActionLink("Detalji", "Details", new { id = item.idkorisnik }) 
+              </td>
+          
+<td>
+@if(session=="admin")
+{
+            @Html.ActionLink("Delete", "Delete", new { id = item.idkorisnik })
+}</td>
+
+        
     </tr>
 }
 

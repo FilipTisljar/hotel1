@@ -1,14 +1,19 @@
 ﻿@model IEnumerable<Hotel_mvc1.Models.Rezervacija>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rezervacije";
 }
 
-<h2>Index</h2>
+<h2>Rezervacije</h2>
+@{string session = (string)Session["uloga"];
 
+}
+@if (Session["idkorisnik"] != null)
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -32,7 +37,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.id_korisnik)
@@ -52,11 +58,22 @@
         <td>
             @Html.DisplayFor(modelItem => item.rezerviranoDo)
         </td>
+     @if (Session["idkorisnik"] != null)
+     {   
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idrezervacija }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idrezervacija }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idrezervacija })
-        </td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.idrezervacija }) 
+            </td>
+            <td>
+            @Html.ActionLink("Details", "Details", new { id = item.idrezervacija }) 
+                </td>
+                <td>
+                @if (session == "admin")
+                {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.idrezervacija })
+                }
+                </td>
+        
+      }
     </tr>
 }
 

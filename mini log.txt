@@ -22,3 +22,7 @@ kod logina koristimo sesije
 
 
 sesija sama drzi objekt koji smo poslali
+
+23.1.2018
+napravljeni logout , i uloge smo slozili z sesijom( dodala se jedna admin uloga)
+

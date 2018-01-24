@@ -20,6 +20,8 @@ namespace Hotel_mvc1.Models
 
         public bool pamtiLozinku { get; set; }
 
+        public string uloga { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

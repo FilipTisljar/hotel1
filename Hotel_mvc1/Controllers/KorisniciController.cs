@@ -76,6 +76,11 @@ namespace Hotel_mvc1.Controllers
                     
                     Session["idkorisnik"] = kor.idkorisnik.ToString();
                     Session["ime"] = kor.ime.ToString();
+                try
+                {
+                    Session["uloga"] = kor.uloga.ToString();
+                }
+                catch { }
                     return RedirectToAction("LoggedIn");
                 }
                 else
@@ -99,6 +104,7 @@ namespace Hotel_mvc1.Controllers
            
             Session["idkorisnik"] = null;
             Session["ime"] = null;
+            Session["uloga"] = null;
             return RedirectToAction("Index");
 
         }

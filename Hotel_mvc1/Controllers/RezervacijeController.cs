@@ -10,6 +10,7 @@ using Hotel_mvc1.Models;
 
 namespace Hotel_mvc1.Controllers
 {
+   
     public class RezervacijeController : Controller
     {
         private hotelBazaContext db = new hotelBazaContext();
