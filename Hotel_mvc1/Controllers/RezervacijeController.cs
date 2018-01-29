@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hotel_mvc1.Models;
+using System.Data.SqlClient;
 
 namespace Hotel_mvc1.Controllers
 {
@@ -49,13 +50,58 @@ namespace Hotel_mvc1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idrezervacija,id_korisnik,id_soba,cijena,datumRezervacije,rezerviranoOd,rezerviranoDo")] Rezervacija rezervacija)
         {
+            string konekcijskiString = "server=localhost;database=hotel;uid=root;password=admin";
+            //string queryString= "SELECT * FROM rezervacija WHERE rezerviranoOd BETWEEN '"+2014-02-21+"' AND"''";";
+            rezervacija.id_korisnik = Convert.ToInt32(Session["idkorisnik"]);
+            List<Rezervacija> rezervacije = new List<Rezervacija>();
+            List<DateTime> datumi = new List<DateTime>();
+            rezervacije = db.rezervacija.ToList();
+            SqlConnection konekcija = new SqlConnection(konekcijskiString);
+            bool vecRez = false;
+            int check = 0;
+
+            if (rezervacija.rezerviranoOd > rezervacija.rezerviranoDo)
+                return View(rezervacija);
+
             if (ModelState.IsValid)
             {
-                db.rezervacija.Add(rezervacija);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+              //  var rezervirano = db.rezervacija.Where(r => r.id_soba == rezervacija.id_soba);//.Where(r => r.rezerviranoOd > rezervacija.rezerviranoDo)||.Where(r => r.rezerviranoDo < rezervacija.rezerviranoOd);
+                
 
+                foreach (Rezervacija a in rezervacije)
+                {
+
+                    if (rezervacija.id_soba == a.id_soba)
+                    {//sql
+                        //SqlCommand cmd = new SqlCommand("SELECT * FROM rezervacija WHERE rezerviranoOd BETWEEN '" + rezervacija.rezerviranoOd + "' AND " + rezervacija.rezerviranoDo + ";", konekcija);
+                        //if (cmd.Clone() == null)
+                        
+
+                           
+                            //if
+                        if ((rezervacija.rezerviranoOd < a.rezerviranoOd && rezervacija.rezerviranoDo < a.rezerviranoOd) || 
+                            (rezervacija.rezerviranoOd > a.rezerviranoDo && rezervacija.rezerviranoDo > a.rezerviranoDo)) {
+                            check++;
+                        }
+                        else
+                        {
+                            vecRez = true;
+                            break;
+                        }
+                        
+                    }
+
+                    if(vecRez==true)
+                        return View(rezervacija);
+                    else {
+                        db.rezervacija.Add(rezervacija);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+
+                return View(rezervacija);
+            }
             return View(rezervacija);
         }
 
