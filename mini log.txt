@@ -26,3 +26,15 @@ sesija sama drzi objekt koji smo poslali
 23.1.2018
 napravljeni logout , i uloge smo slozili z sesijom( dodala se jedna admin uloga)
 
+ev - kak da se idkorisnik sam dene - kroz session strikanje, oddamo id 
+i trazimo natrag kroz kontroller
+- kak da se napravi spustajuci izmornik
+
+- i nesme biti vec rezervirana soba
+
+-cjena nek se sama zbroji
+
+
+
+
+
