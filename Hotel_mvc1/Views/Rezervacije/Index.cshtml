@@ -6,14 +6,15 @@
 
 <h2>Rezervacije</h2>
 @{string session = (string)Session["uloga"];
-
+    int id = Convert.ToInt32(Session["id"]);
 }
-@if (Session["idkorisnik"] != null)
+@if(Session["idkorisnik"] != null)
 {
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nova rezervacija", "Create")
 </p>
 }
+
 <table class="table">
     <tr>
         <th>
@@ -39,6 +40,8 @@
 
 @foreach (var item in Model)
 {
+    if (id == item.id_korisnik)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.id_korisnik)
@@ -59,22 +62,20 @@
             @Html.DisplayFor(modelItem => item.rezerviranoDo)
         </td>
      @if (Session["idkorisnik"] != null)
-     {   
-        <td>
+     {
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { id = item.idrezervacija }) 
-            </td>
+            </td>*@
             <td>
-            @Html.ActionLink("Details", "Details", new { id = item.idrezervacija }) 
+            @Html.ActionLink("Detalji", "Details", new { id = item.idrezervacija }) 
                 </td>
                 <td>
-                @if (session == "admin")
-                {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.idrezervacija })
-                }
+                        @Html.ActionLink("Obriši rezervaciju", "Delete", new { id = item.idrezervacija })
                 </td>
-        
-      }
+
+     }
     </tr>
-}
+        }
+    }
 
 </table>

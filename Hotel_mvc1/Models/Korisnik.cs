@@ -14,17 +14,18 @@ namespace Hotel_mvc1.Models
         [Display(Name = "Id")]
         public int idkorisnik { get; set; }
 
+        [Display(Name = "Ime")]
         public string ime { get; set; }
-
+        [Display(Name = "Prezime")]
         public string prezime { get; set; }
-
+        [Display(Name = "Pamti lozinku")]
         public bool pamtiLozinku { get; set; }
 
         public string uloga { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Lozinka")]
         public string lozinka { get; set; }
 
         [Required]

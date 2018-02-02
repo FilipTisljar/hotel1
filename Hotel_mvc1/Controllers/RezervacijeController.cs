@@ -65,42 +65,42 @@ namespace Hotel_mvc1.Controllers
 
             if (ModelState.IsValid)
             {
-              //  var rezervirano = db.rezervacija.Where(r => r.id_soba == rezervacija.id_soba);//.Where(r => r.rezerviranoOd > rezervacija.rezerviranoDo)||.Where(r => r.rezerviranoDo < rezervacija.rezerviranoOd);
-                
+                //  var rezervirano = db.rezervacija.Where(r => r.id_soba == rezervacija.id_soba);//.Where(r => r.rezerviranoOd > rezervacija.rezerviranoDo)||.Where(r => r.rezerviranoDo < rezervacija.rezerviranoOd);
+
 
                 foreach (Rezervacija a in rezervacije)
                 {
 
                     if (rezervacija.id_soba == a.id_soba)
                     {//sql
-                        //SqlCommand cmd = new SqlCommand("SELECT * FROM rezervacija WHERE rezerviranoOd BETWEEN '" + rezervacija.rezerviranoOd + "' AND " + rezervacija.rezerviranoDo + ";", konekcija);
-                        //if (cmd.Clone() == null)
-                        
+                     //SqlCommand cmd = new SqlCommand("SELECT * FROM rezervacija WHERE rezerviranoOd BETWEEN '" + rezervacija.rezerviranoOd + "' AND " + rezervacija.rezerviranoDo + ";", konekcija);
+                     //if (cmd.Clone() == null)
 
-                           
-                            //if
-                        if ((rezervacija.rezerviranoOd < a.rezerviranoOd && rezervacija.rezerviranoDo < a.rezerviranoOd) || 
-                            (rezervacija.rezerviranoOd > a.rezerviranoDo && rezervacija.rezerviranoDo > a.rezerviranoDo)) {
-                            check++;
+
+
+                        //if
+                            if ((rezervacija.rezerviranoOd < a.rezerviranoOd && rezervacija.rezerviranoDo < a.rezerviranoOd) ||
+                                (rezervacija.rezerviranoOd > a.rezerviranoDo && rezervacija.rezerviranoDo > a.rezerviranoDo && rezervacija.rezerviranoDo < a.rezerviranoOd))
+                            {
+                                check++;
+                            }
+                            else
+                            {
+                                vecRez = true;
+                                break;
+                            }
                         }
-                        else
-                        {
-                            vecRez = true;
-                            break;
-                        }
-                        
                     }
-
-                    if(vecRez==true)
+                    if (vecRez == true)
+                    {
                         return View(rezervacija);
+                    }
                     else {
                         db.rezervacija.Add(rezervacija);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
-                }
-
-                return View(rezervacija);
+               // return View(rezervacija);
             }
             return View(rezervacija);
         }

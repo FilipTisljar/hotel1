@@ -8,6 +8,9 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
+@{string session = (string)Session["uloga"];
+
+}
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -17,7 +20,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Hotel booking", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -25,9 +28,14 @@
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     <li>@Html.ActionLink("Sobe", "Index", "Sobe")</li>
-             
-                    <li>@Html.ActionLink("Rezervacije", "Index", "Rezervacije")</li>
+                        @if (Session["idkorisnik"] != null)
+                        {
+                    <li>@Html.ActionLink("Moje Rezervacije", "Index", "Rezervacije")</li>
+                        }
+                        @if (session == "admin")
+                        {
                     <li>@Html.ActionLink("Korisnici", "Index", "Korisnici")</li>
+                        }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -37,7 +45,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Hotel booking</p>
         </footer>
     </div>
 

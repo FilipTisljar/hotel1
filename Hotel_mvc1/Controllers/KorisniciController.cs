@@ -101,14 +101,11 @@ namespace Hotel_mvc1.Controllers
         [HttpPost]
         public ActionResult Logoff(Korisnik korisnik)
         {
-
-           
             Session["idkorisnik"] = null;
             Session["ime"] = null;
             Session["uloga"] = null;
             Session["id"] = null;
-            return RedirectToAction("Index");
-
+            return RedirectToAction("Index","Home");
         }
         public ActionResult LoggedIn()
         {

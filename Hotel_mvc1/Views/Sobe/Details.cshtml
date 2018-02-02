@@ -28,7 +28,14 @@
 
     </dl>
 </div>
+@{string session = (string)Session["uloga"];
+
+}
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idsoba }) |
+@if (session == "admin")
+{
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idsoba }) <line>|</line>
+        }
     @Html.ActionLink("Back to List", "Index")
 </p>
