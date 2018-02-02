@@ -15,7 +15,7 @@ namespace Hotel_mvc1.Models
         public int idrezervacija { get; set; }
 
         public int id_korisnik { get; set; }
-
+        [Display(Name = "Broj sobe")]
         public int id_soba { get; set; }
 
         public string cijena { get; set; }

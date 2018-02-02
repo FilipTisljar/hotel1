@@ -29,7 +29,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.id_soba, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.id_soba, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.id_soba, new { htmlAttributes = new { @class = "form-control", @min="1" } })
                     @Html.ValidationMessageFor(model => model.id_soba, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -42,13 +42,13 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.datumRezervacije, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.datumRezervacije, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.datumRezervacije, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.rezerviranoOd, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -68,12 +68,12 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Registriraj se" class="btn btn-default" />
+                    <input type="submit" value="Napravi rezervaciju" class="btn btn-default" />
                 </div>
             </div>
         </div>
 }
 
 <div>
-    @Html.ActionLink("Natrag na početnu", "Index", "Home")
+    @Html.ActionLink("Natrag na listu", "Index")
 </div>

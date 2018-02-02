@@ -48,15 +48,14 @@ namespace Hotel_mvc1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idrezervacija,id_korisnik,id_soba,cijena,datumRezervacije,rezerviranoOd,rezerviranoDo")] Rezervacija rezervacija)
+        public ActionResult Create([Bind(Include = "idrezervacija,id_korisnik,id_soba,cijena,rezerviranoOd,rezerviranoDo")] Rezervacija rezervacija)
         {
-            string konekcijskiString = "server=localhost;database=hotel;uid=root;password=admin";
-            //string queryString= "SELECT * FROM rezervacija WHERE rezerviranoOd BETWEEN '"+2014-02-21+"' AND"''";";
+            rezervacija.datumRezervacije = DateTime.Now;
             rezervacija.id_korisnik = Convert.ToInt32(Session["idkorisnik"]);
             List<Rezervacija> rezervacije = new List<Rezervacija>();
             List<DateTime> datumi = new List<DateTime>();
             rezervacije = db.rezervacija.ToList();
-            SqlConnection konekcija = new SqlConnection(konekcijskiString);
+           
             bool vecRez = false;
             int check = 0;
 
@@ -72,16 +71,10 @@ namespace Hotel_mvc1.Controllers
                 {
 
                     if (rezervacija.id_soba == a.id_soba)
-                    {//sql
-                     //SqlCommand cmd = new SqlCommand("SELECT * FROM rezervacija WHERE rezerviranoOd BETWEEN '" + rezervacija.rezerviranoOd + "' AND " + rezervacija.rezerviranoDo + ";", konekcija);
-                     //if (cmd.Clone() == null)
-
-
-
-                        //if
+                    {
                             if ((rezervacija.rezerviranoOd < a.rezerviranoOd && rezervacija.rezerviranoDo < a.rezerviranoOd) ||
-                                (rezervacija.rezerviranoOd > a.rezerviranoDo && rezervacija.rezerviranoDo > a.rezerviranoDo && rezervacija.rezerviranoDo < a.rezerviranoOd))
-                            {
+                                (rezervacija.rezerviranoOd > a.rezerviranoDo && rezervacija.rezerviranoDo > a.rezerviranoDo ))//&& rezervacija.rezerviranoDo < a.rezerviranoOd?
+                        {
                                 check++;
                             }
                             else

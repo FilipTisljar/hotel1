@@ -54,7 +54,7 @@ namespace Hotel_mvc1.Controllers
                 db.korisnik.Add(korisnik);
                 db.SaveChanges();
                 ModelState.Clear();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             return View(korisnik);
