@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Hotel_mvc1.Models;
 using System.Data.SqlClient;
+using System.Windows;
 
 namespace Hotel_mvc1.Controllers
 {
@@ -36,7 +37,54 @@ namespace Hotel_mvc1.Controllers
             }
             return View(rezervacija);
         }
+        public ActionResult Slobodni()
+        {
+            return View();
+        }
+        public ActionResult SlobodneSobe()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Slobodni([Bind(Include = "rezerviranoOd,rezerviranoDo")] Rezervacija rezervacija)
+        {
+
+            Session["rezOd"] = rezervacija.rezerviranoOd.ToString();
+            Session["rezDo"] = rezervacija.rezerviranoDo.ToString();
+
+            List<Rezervacija> rezervacije = new List<Rezervacija>();
+            List<Soba> sl_sobe = new List<Soba>();
+            sl_sobe = db.soba.ToList();
+            rezervacije = db.rezervacija.ToList();
+            foreach(Rezervacija a in rezervacije)
+            {
+               
+                if ((rezervacija.rezerviranoOd < a.rezerviranoOd && rezervacija.rezerviranoDo < a.rezerviranoOd) ||
+                    (rezervacija.rezerviranoOd > a.rezerviranoDo && rezervacija.rezerviranoDo > a.rezerviranoDo))//&& rezervacija.rezerviranoDo < a.rezerviranoOd?
+                {
+                      
+                }
+                else
+                {    banana:
+                    foreach(Soba b in sl_sobe)
+                    {
+                        if (b.idsoba == a.id_soba)
+                        {
+                            sl_sobe.RemoveAt(sl_sobe.IndexOf(b));
+                            goto banana; 
+                        }
+                    }
+                //sl_sobe.RemoveAt(a.id_soba);
+                //sl_sobe.IndexOf(); 
+                    
+                }  
+            }
+            return View("SlobodneSobe",sl_sobe);
+        }
+
+           
+        
         // GET: Rezervacije/Create
         public ActionResult Create()
         {

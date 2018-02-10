@@ -68,9 +68,9 @@ namespace Hotel_mvc1.Controllers
         public ActionResult Login(Korisnik korisnik)
         {
             //single zeme jedan objekt koji zadovoljava uvjet
-           // try
-          //  {
-                var kor = db.korisnik.Single(m => m.email == korisnik.email && m.lozinka == korisnik.lozinka);
+           try
+           {
+                var kor = db.korisnik.SingleOrDefault(m => m.email == korisnik.email && m.lozinka == korisnik.lozinka); 
                 if (kor != null)
                 {
                     
@@ -89,13 +89,13 @@ namespace Hotel_mvc1.Controllers
                     ModelState.AddModelError(" ", "Kriva lozinka ili email");
                 }
                 return View();
-          //  }
+            }
 
-            //catch (System.IO.IOException e)
-            //{
-            //    Console.WriteLine("Error : {0}", e.Message);
-            //    return View();
-            //}
+            catch (System.IO.IOException e)
+            {
+               Console.WriteLine("Error : {0}", e.Message);
+                return View();
+            }
 
         }
         [HttpPost]

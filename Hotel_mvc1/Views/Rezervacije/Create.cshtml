@@ -10,6 +10,9 @@
    model.id_korisnik = int.Parse(session);
     @Html.EditorFor(model => model.id_korisnik )
 }*@
+@{   string rezOd = (string)Session["rezOd"];
+    string rezDo = (string)Session["rezDo"];
+    }
 <h2>Nova rezervacija</h2>
 
 @using (Html.BeginForm()) 
@@ -53,7 +56,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.rezerviranoOd, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.rezerviranoOd, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.rezerviranoOd,rezOd, new { htmlAttributes = new { @class = "form-control", Value = rezOd } })
                     @Html.ValidationMessageFor(model => model.rezerviranoOd, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -61,7 +64,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.rezerviranoDo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.rezerviranoDo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.rezerviranoDo,rezDo, new { htmlAttributes = new { @class = "form-control", Value = rezDo } })
                     @Html.ValidationMessageFor(model => model.rezerviranoDo, "", new { @class = "text-danger" })
                 </div>
             </div>

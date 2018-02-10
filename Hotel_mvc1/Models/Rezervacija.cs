@@ -21,9 +21,9 @@ namespace Hotel_mvc1.Models
         public string cijena { get; set; }
 
         public DateTime datumRezervacije{ get; set; }
-
+        [Display(Name = "Rezervirano od")]
         public DateTime rezerviranoOd { get; set; }
-
+        [Display(Name = "Rezervirano do")]
         public DateTime rezerviranoDo { get; set; }
     }
 }

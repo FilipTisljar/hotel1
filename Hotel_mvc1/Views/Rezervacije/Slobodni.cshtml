@@ -1,0 +1,48 @@
+﻿
+
+@model Hotel_mvc1.Models.Rezervacija
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{string session = (string)Session["uloga"];
+    int id = Convert.ToInt32(Session["id"]);
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pretraga slobodnih smjestaja</title>
+</head>
+<h2>Pretraga slobodnih smjestaja</h2>
+@using (Html.BeginForm())
+{
+
+<div class="form-group">
+    @Html.LabelFor(model => model.rezerviranoOd, htmlAttributes: new { @class = "control-label col-md-1.2" })
+    <div class="col-md-20">
+        @Html.EditorFor(model => model.rezerviranoOd, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.rezerviranoOd, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.rezerviranoDo, htmlAttributes: new { @class = "control-label col-md-1.2" })
+    <div class="col-md-20">
+        @Html.EditorFor(model => model.rezerviranoDo, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.rezerviranoDo, "", new { @class = "text-danger" })
+    </div>
+</div>
+<span></span>
+<div>
+    <input type="submit" value="Provjeri slobodne sobe" class="btn btn-default" />
+</div>
+}
+<body>
+    <div>
+
+    </div>
+</body>
+
+
