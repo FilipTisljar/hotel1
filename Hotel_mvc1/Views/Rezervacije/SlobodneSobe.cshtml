@@ -8,7 +8,7 @@
 
 
 @{string session = (string)Session["uloga"];
-
+    
 }
 @if (session == "admin")
 {
@@ -37,11 +37,13 @@
                 @Html.DisplayFor(modelItem => item.brojKreveta)
             </td>
             <td>
-
                 @Html.ActionLink("Detalji", "Details", new { id = item.idsoba })
             </td>
             <td>
-                @Html.ActionLink("Rezerviraj", "Create", new { id = item.idsoba })
+                @*@{var prosljedeniID = item.idsoba;
+                    TempData["prosjeđeniID"] = prosljedeniID;  }*@
+                @Html.ActionLink("Rezerviraj", "Create", new { id = item.idsoba})
+                
             </td>
 
             @if (session == "admin")

@@ -20,6 +20,8 @@ namespace Hotel_mvc1.Controllers
         // GET: Rezervacije
         public ActionResult Index()
         {
+            
+            Session["MaxIDSoba"]= db.soba.Count();
             return View(db.rezervacija.ToList());
         }
 
@@ -61,7 +63,7 @@ namespace Hotel_mvc1.Controllers
             {
                
                 if ((rezervacija.rezerviranoOd < a.rezerviranoOd && rezervacija.rezerviranoDo < a.rezerviranoOd) ||
-                    (rezervacija.rezerviranoOd > a.rezerviranoDo && rezervacija.rezerviranoDo > a.rezerviranoDo))//&& rezervacija.rezerviranoDo < a.rezerviranoOd?
+                    (rezervacija.rezerviranoOd > a.rezerviranoDo && rezervacija.rezerviranoDo > a.rezerviranoDo))   //&& rezervacija.rezerviranoDo < a.rezerviranoOd?
                 {
                       
                 }
@@ -86,9 +88,12 @@ namespace Hotel_mvc1.Controllers
            
         
         // GET: Rezervacije/Create
-        public ActionResult Create()
+        public ActionResult Create([Bind(Include = "idsoba")] Soba soba)
         {
-            return View();
+            Rezervacija rezervacija=new Rezervacija();
+            rezervacija.id_soba = soba.idsoba;
+
+            return View(rezervacija);
         }
 
         // POST: Rezervacije/Create
@@ -154,6 +159,7 @@ namespace Hotel_mvc1.Controllers
                     else {
                         db.rezervacija.Add(rezervacija);
                         db.SaveChanges();
+                //??
                         return RedirectToAction("Index");
                     }
                // return View(rezervacija);
