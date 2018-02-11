@@ -96,18 +96,33 @@ namespace Hotel_mvc1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idrezervacija,id_korisnik,id_soba,cijena,rezerviranoOd,rezerviranoDo")] Rezervacija rezervacija)
+        public ActionResult Create([Bind(Include = "idrezervacija,id_korisnik,id_soba,rezerviranoOd,rezerviranoDo")] Rezervacija rezervacija)
         {
+           DateTime d1= rezervacija.rezerviranoOd;
+            DateTime d2=rezervacija.rezerviranoDo;
+            
+            TimeSpan d3 =(d2 - d1);
+            double brojdana = d3.TotalDays;
+            List<Soba> sobe = new List<Soba>();
+            sobe = db.soba.ToList();
+            Soba s = sobe.Find(x => x.idsoba == rezervacija.id_soba);
+            double cijena = brojdana * s.cijenaSobe;
+            rezervacija.cijena = cijena.ToString()+" kn";
             rezervacija.datumRezervacije = DateTime.Now;
             rezervacija.id_korisnik = Convert.ToInt32(Session["idkorisnik"]);
+          //  
             List<Rezervacija> rezervacije = new List<Rezervacija>();
-            List<DateTime> datumi = new List<DateTime>();
+         //   List<DateTime> datumi = new List<DateTime>();
             rezervacije = db.rezervacija.ToList();
-           
+           // 
+           // 
+          //  rezervacija.cijena=a.cijenaSobe * Convert.ToInt32(vrijemeNocenja);
             bool vecRez = false;
             int check = 0;
 
             if (rezervacija.rezerviranoOd > rezervacija.rezerviranoDo)
+                return View(rezervacija);
+            if (rezervacija.rezerviranoOd < DateTime.Now || rezervacija.rezerviranoOd < DateTime.Now)
                 return View(rezervacija);
 
             if (ModelState.IsValid)

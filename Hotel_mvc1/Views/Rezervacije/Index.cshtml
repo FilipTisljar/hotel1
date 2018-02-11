@@ -44,6 +44,10 @@
 {
     if (id == item.id_korisnik)
     {
+            string dRez =  item.datumRezervacije.ToShortDateString();
+            string rezOd = item.rezerviranoOd.ToShortDateString();
+            string rezDo = item.rezerviranoDo.ToShortDateString();
+                
     <tr>
         @*<td>
             @Html.DisplayFor(modelItem => item.id_korisnik)
@@ -55,13 +59,13 @@
             @Html.DisplayFor(modelItem => item.cijena)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.datumRezervacije)
+            @Html.DisplayFor(modelItem => dRez)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.rezerviranoOd)
+            @Html.DisplayFor(modelItem => rezOd)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.rezerviranoDo)
+            @Html.DisplayFor(modelItem => rezDo)
         </td>
      @if (Session["idkorisnik"] != null)
      {

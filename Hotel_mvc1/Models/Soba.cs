@@ -17,5 +17,7 @@ namespace Hotel_mvc1.Models
         public int brojSobe { get; set; }
 
         public int brojKreveta { get; set; }
+
+        public int cijenaSobe { get; set; }
     }
 }

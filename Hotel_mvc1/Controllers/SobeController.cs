@@ -78,7 +78,7 @@ namespace Hotel_mvc1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idsoba,brojSobe,brojKreveta")] Soba soba)
+        public ActionResult Edit([Bind(Include = "idsoba,brojSobe,brojKreveta,cijenaSobe")] Soba soba)
         {
             if (ModelState.IsValid)
             {
