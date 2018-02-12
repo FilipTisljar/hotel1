@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,12 +7,111 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @*<link rel="stylesheet" href="blueberry.css" />
+    <style type="text/css">
+        {
+            margin: 0;
+            border: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url('../Slike/Doors.png');
+            
+            background-size: cover;
+            font: 14px/20px Arial,San-Serif;
+            color: #555;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 180%;
+            line-height: 120%;
+            padding: 5% 0;
+        }
+
+        h2 {
+            text-decoration: underline;
+            line-height: 280%;
+            padding-left: 2%;
+        }
+
+        h3 {
+            line-height: 110px;
+            padding: 5% 0;
+        }
+
+        p {
+            padding: 1%;
+        }
+
+        img {
+            text-align: center;
+            max-width: 100%;
+            height: auto;
+            width: auto;
+        }
+
+        a {
+            color: #FFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            a:hover {
+                color: #FFF;
+                text-decoration: underline;
+            }
+
+        ul {
+            list-style: none;
+        }
+
+        header {
+            background: #405580;
+            width: 100%;
+            height: 86px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            opacity: 0.90;
+        }
+
+       
+
+        nav {
+            float: right;
+            padding: 35px 20px 20px 0px;
+        }
+
+
+        a:hover#menu-icon {
+            border-radius: 4px 4px 0 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            float: left;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://ajax.googleapi.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="jquery.blueberry.js"></script>
+
+    <script>
+        $(window).load(function(){
+            $('.blueberry').blueberry();
+        });
+    </script>*@
 
 </head>
 @{string session = (string)Session["uloga"];
 
 }
-<body>
+
+<body class="body-content">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -27,7 +127,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                    <li>@Html.ActionLink("Sobe", "Index", "Sobe")</li>
+                    <li>@Html.ActionLink("Sobe", "Index", "Sobe")</></li>
                         @if (Session["idkorisnik"] != null)
                         {
                     <li>@Html.ActionLink("Moje Rezervacije", "Index", "Rezervacije")</li>
