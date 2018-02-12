@@ -48,6 +48,48 @@ namespace Hotel_mvc1.Controllers
             return View();
         }
 
+        public ActionResult JeRezervirano(int idSoba, DateTime rezervacijaOd, DateTime rezervacijaDo)
+        {
+            string obavijest = "<p style='color: green;'><strong>Rezervacija slobodna.</strong></p>";
+            List<Rezervacija> rezervacije = db.rezervacija.ToList();
+
+            foreach (Rezervacija rez in rezervacije)
+            {
+                if ((rez.rezerviranoDo < rezervacijaOd && rez.rezerviranoDo < rezervacijaDo) ||
+                    (rez.rezerviranoOd > rezervacijaDo && rez.rezerviranoOd > rezervacijaOd))
+                {
+                    continue;
+                }
+                else
+                {
+                    obavijest = "<p style='color: red;'><strong>Rezervacija već postoji!</strong></p>";
+                    break;
+                }
+            }
+
+            if (obavijest.Contains("slobodna"))
+            {
+                TimeSpan rasponRezervacije = (rezervacijaDo - rezervacijaOd);
+                double brojdana = rasponRezervacije.TotalDays;
+                List<Soba> sobe = db.soba.ToList();
+
+                Soba s = sobe.Find(x => x.idsoba == idSoba);
+
+                if (s != null)
+                {
+                    double cijena = brojdana * s.cijenaSobe;
+
+                    obavijest += "<br><p style='color: green;'>Cijena rezervacije: " + cijena.ToString() + " kn</p>";
+                }
+                else
+                {
+                    obavijest = "<br><p style='color: red'>Soba pod odabranim brojem ne postoji!</p>";
+                }
+            }
+
+            return Json(obavijest, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Slobodni([Bind(Include = "rezerviranoOd,rezerviranoDo")] Rezervacija rezervacija)
         {
@@ -162,6 +204,7 @@ namespace Hotel_mvc1.Controllers
                     else {
                         db.rezervacija.Add(rezervacija);
                         db.SaveChanges();
+                    Session["sobaID"] = null;
                 //??
                         return RedirectToAction("Index");
                     }
