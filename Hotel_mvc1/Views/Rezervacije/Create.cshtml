@@ -14,11 +14,14 @@
     string rezDo = (string)Session["rezDo"];
     // int brSobe = Convert.ToInt32(TempData["prosjeđeniID"]);
     int max= Convert.ToInt32(Session["MaxIDSoba"]);
-    int brSobe2 = Model.id_soba;
+    //int brSobe2 = Model.id_soba;
     //List<Soba> sobe = new List<Soba>();
     //int identrifikator= Hotel_mvc1.Models.Soba
-
-
+    int idSobe = 1;
+    if (Session["sobaID"] != null)
+    {
+         idSobe = Convert.ToInt32(Session["sobaID"]);
+    }
 
 }
 <h2>Nova rezervacija</h2>
@@ -40,7 +43,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.id_soba, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.id_soba, new { htmlAttributes = new { @class = "form-control", @min = "1",@max=max, Value=brSobe2 } })
+                    @Html.EditorFor(model => model.id_soba, new { htmlAttributes = new { @class = "form-control", @min = "1",@max=max, Value=idSobe } })
                     @Html.ValidationMessageFor(model => model.id_soba, "", new { @class = "text-danger" })
                 </div>
             </div>

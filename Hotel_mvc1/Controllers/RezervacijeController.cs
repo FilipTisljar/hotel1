@@ -88,12 +88,15 @@ namespace Hotel_mvc1.Controllers
            
         
         // GET: Rezervacije/Create
-        public ActionResult Create([Bind(Include = "idsoba")] Soba soba)
+        public ActionResult Create(int? id)
         {
-            Rezervacija rezervacija=new Rezervacija();
-            rezervacija.id_soba = soba.idsoba;
-
-            return View(rezervacija);
+            if (id != null)
+            {
+                Session["sobaID"] = id;
+                return View();
+            }
+            else
+            return View();
         }
 
         // POST: Rezervacije/Create
