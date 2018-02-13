@@ -20,8 +20,10 @@ namespace Hotel_mvc1.Models
         [Display(Name = "Broj sobe")]
         public int id_soba { get; set; }
 
+        [Display(Name = "Cijena")]
         public string cijena { get; set; }
 
+        [Display(Name = "Datum rezervacije")]
         public DateTime datumRezervacije{ get; set; }
 
         [Required]

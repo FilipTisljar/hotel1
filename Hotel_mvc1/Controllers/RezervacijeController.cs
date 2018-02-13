@@ -52,26 +52,34 @@ namespace Hotel_mvc1.Controllers
         {
             string obavijest = "<p style='color: green;'><strong>Rezervacija slobodna.</strong></p>";
             List<Rezervacija> rezervacije = db.rezervacija.ToList();
+            List<Soba> sobe = db.soba.ToList();
+            Soba so = sobe.Find(x => x.idsoba == idSoba);
+            int id = so.idsoba;
 
             foreach (Rezervacija rez in rezervacije)
             {
-                if ((rez.rezerviranoDo < rezervacijaOd && rez.rezerviranoDo < rezervacijaDo) ||
-                    (rez.rezerviranoOd > rezervacijaDo && rez.rezerviranoOd > rezervacijaOd))
+                //  
+                if (rez.id_soba == id)
                 {
-                    continue;
+                    if ((rez.rezerviranoDo < rezervacijaOd && rez.rezerviranoDo < rezervacijaDo) ||
+                        (rez.rezerviranoOd > rezervacijaDo && rez.rezerviranoOd > rezervacijaOd))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        obavijest = "<p style='color: red;'><strong>Rezervacija već postoji!</strong></p>";
+                        break;
+                    }
                 }
-                else
-                {
-                    obavijest = "<p style='color: red;'><strong>Rezervacija već postoji!</strong></p>";
-                    break;
-                }
+                continue;
             }
 
             if (obavijest.Contains("slobodna"))
             {
                 TimeSpan rasponRezervacije = (rezervacijaDo - rezervacijaOd);
                 double brojdana = rasponRezervacije.TotalDays;
-                List<Soba> sobe = db.soba.ToList();
+                
 
                 Soba s = sobe.Find(x => x.idsoba == idSoba);
 

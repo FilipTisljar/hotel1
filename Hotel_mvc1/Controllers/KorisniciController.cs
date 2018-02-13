@@ -140,7 +140,7 @@ namespace Hotel_mvc1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idkorisnik,ime,prezime,pamtiLozinku,lozinka,email")] Korisnik korisnik)
+        public ActionResult Edit([Bind(Include = "idkorisnik,ime,prezime,pamtiLozinku,uloga,lozinka,email")] Korisnik korisnik)
         {
             if (ModelState.IsValid)
             {

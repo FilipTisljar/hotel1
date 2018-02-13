@@ -17,6 +17,7 @@ namespace Hotel_mvc1.Controllers
         // GET: Sobe
         public ActionResult Index()
         {
+            Session["MaxIDSoba"] = db.soba.Count();
             return View(db.soba.ToList());
         }
 
@@ -46,12 +47,16 @@ namespace Hotel_mvc1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idsoba,brojSobe,brojKreveta")] Soba soba)
+        public ActionResult Create([Bind(Include = "idsoba,brojSobe,brojKreveta,cijenaSobe")] Soba soba)
         {
+            int id= Convert.ToInt32(soba.brojSobe);
+            soba.idsoba = id;
             if (ModelState.IsValid)
             {
                 db.soba.Add(soba);
                 db.SaveChanges();
+                int broj = Convert.ToInt32(Session["MaxIDSoba"]) + 1;
+                Session["MaxIDSoba"]= broj;
                 return RedirectToAction("Index");
             }
 
